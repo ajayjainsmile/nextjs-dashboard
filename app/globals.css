@@ -5,8 +5,51 @@
 
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+       --background: 0 0% 100%;
+    --foreground: 10 14% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 10 14% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 10 14% 15%;
+
+    --primary: 260 80% 56%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 300 70% 54%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 11% 71%;
+    --muted-foreground: 215 14% 34%;
+
+    --accent: 40 93% 58%;
+    --accent-foreground: 10 14% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 32% 91.4%;
+    --input: 214.3 32% 91.4%;
+    --ring: 260 80% 56%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 10 14% 15%;
+
+    --sidebar-primary: 260 80% 56%;
+
+    --sidebar-primary-foreground: 0 0% 100%;
+
+    --sidebar-accent: 300 70% 54%;
+
+    --sidebar-accent-foreground: 0 0% 100%;
+
+    --sidebar-border: 214.3 32% 91.4%;
+
+    --sidebar-ring: 260 80% 56%;
 }
 
 @theme inline {
@@ -18,13 +61,91 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 10 8% 10%;
+    --foreground: 0 0% 98%;
+    --card: 10 5% 20%;
+    --card-foreground: 0 0% 98%;
+    --popover: 10 5% 20%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 260 80% 56%;
+    --primary-foreground: 10 8% 10%;
+    --secondary: 300 70% 54%;
+    --secondary-foreground: 10 8% 10%;
+    --muted: 210 7% 35%;
+    --muted-foreground: 210 13% 70%;
+    --accent: 40 93% 58%;
+    --accent-foreground: 10 8% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 10 5% 30%;
+    --input: 10 5% 30%;
+    --ring: 260 80% 56%;
+    --sidebar-background: 10 8% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 260 80% 56%;
+    --sidebar-primary-foreground: 10 8% 10%;
+    --sidebar-accent: 300 70% 54%;
+    --sidebar-accent-foreground: 10 8% 10%;
+    --sidebar-border: 10 5% 30%;
+    --sidebar-ring: 260 80% 56%;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.to-secondary {
+  --tw-gradient-to: hsl(var(--secondary)) var(--tw-gradient-to-position);
+}
+.gradient-primary-secondary {
+  background-image: linear-gradient(
+    to right,
+    hsl(var(--primary)),
+    hsl(var(--secondary))
+  );
+}
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.btn-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+.btn-accent {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+.bg-gradient-to-br {
+  background-image: linear-gradient(
+    to bottom right,
+    #ede9fe,   /* light purple */
+    #eff6ff    /* light blue */
+  );
+}
+.background-purple-light{
+  background-color: #f8f5fe;
+}
+
+.from-lightHero {
+  background: linear-gradient(
+    to bottom right,
+    #ffffff,
+    #f3e8ff,
+    #ffffff
+  );
+}
+.head-border {
+  border-color: #E5E7EB;
+}
+.via-purple-100{
+  background-color: #e1d0f9;
+}
+.text-purple-300{
+  color: #b892f2;
+}
+.to-secondary\/5 {
+  --tw-gradient-to: hsl(var(--secondary) / 0.05) var(--tw-gradient-to-position);
 }
