@@ -14,6 +14,7 @@ export async function POST(req: Request) {
       { status: 401 }
     );
   }
+  console.log("User found during login:", user); // --- IGNORE ---
   if (!user.isVerified) {
     return NextResponse.json(
       { error: "Email not verified. Please verify your email before logging in." },
