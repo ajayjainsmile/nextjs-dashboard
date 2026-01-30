@@ -76,7 +76,7 @@ export default function Header({ user }: HeaderProps) {
                 <Button variant="outline">Dashboard</Button>
               </Link>
 
-              <form action="/api/logout" method="post">
+              <form action="/api/auth/logout" method="post">
                 <Button type="submit">Logout</Button>
               </form>
             </>

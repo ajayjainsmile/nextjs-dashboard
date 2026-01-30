@@ -1,24 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { cache, useState } from "react";
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
-import { loginAction } from "@/app/actions/auth";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginForm() {
+  
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+
+   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setIsLoading(true);
+    
+    try{
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+      });
 
-    const formData = new FormData(e.currentTarget);
-    const res = await loginAction(formData);
+    if (!res.ok) {
+        const errorData = await res.json();
+        setError(errorData.error || "Login failed");
+        setIsLoading(false);
+        return;
+      }
 
-    if (res?.error) {
-      setError(res.error);
+      // ✅ Cookie already set by server
+      router.push("/dashboard");
+      router.refresh()
+
+    }catch(e){
+      setError("An error occurred during login.");
       setIsLoading(false);
     }
   }
@@ -41,7 +62,7 @@ export default function LoginForm() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleLogin} className="space-y-5">
               {/* Email */}
               <div>
                 <label className="block text-sm font-semibold text-gray-900 mb-2">
@@ -53,6 +74,7 @@ export default function LoginForm() {
                     name="email"
                     type="email"
                     required
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   />
@@ -75,6 +97,7 @@ export default function LoginForm() {
                     name="password"
                     type={showPassword ? "text" : "password"}
                     required
+                      onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   />
@@ -152,9 +175,9 @@ export default function LoginForm() {
 
             <p className="text-center mt-8 text-gray-600">
               Don't have an account?{" "}
-              <span className="font-semibold text-indigo-600 hover:underline cursor-pointer">
-                Sign up
-              </span>
+               <Link href="/signup" className="font-semibold text-indigo-600 hover:underline cursor-pointer">
+                  Sign Up
+               </Link>
             </p>
           </div>
         </div>

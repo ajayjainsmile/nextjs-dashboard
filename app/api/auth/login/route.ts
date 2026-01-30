@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/app/lib/db";
 import User from "@/app/models/User";
-import { verifyPassword } from "@/app/lib/password";
+import verifyPassword from "@/app/lib/password";
 
 export async function POST(req: Request) {
   const { email, password } = await req.json();
-
   await connectDB();
 
   const user = await User.findOne({ email });
@@ -15,7 +14,12 @@ export async function POST(req: Request) {
       { status: 401 }
     );
   }
-
+  if (!user.isVerified) {
+    return NextResponse.json(
+      { error: "Email not verified. Please verify your email before logging in." },
+      { status: 403 }
+    );
+  }
   const ok = await verifyPassword(password, user.passwordHash);
   if (!ok) {
     return NextResponse.json(
@@ -28,8 +32,10 @@ export async function POST(req: Request) {
     id: user._id.toString(),
     email: user.email,
     name: user.name,
+    credits: user.credits,
+    role: user.role,
+    isVerified: user.isVerified,
   };
-
   const res = NextResponse.json({ success: true });
 
   res.cookies.set("session", JSON.stringify(sessionData), {

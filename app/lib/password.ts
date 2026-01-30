@@ -1,7 +1,11 @@
 //import bcrypt from "bcryptjs";
 import * as bcrypt from "bcryptjs";
 
-export async function verifyPassword(
+export async function hashPassword(password: string) {
+  return bcrypt.hash(password, 10);
+}
+
+export default async function verifyPassword(
   password: string,
   hash: string
 ) {
