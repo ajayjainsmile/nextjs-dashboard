@@ -1,4 +1,5 @@
 import { Sparkles, ArrowRight, Image } from "lucide-react";
+import ImageSlider from "./imageSlider";
 
 export default function HeroHome() {
   return (
@@ -42,17 +43,10 @@ export default function HeroHome() {
         </div>
 
         {/* Image / Upload Section */}
-        <div className="mt-20 rounded-2xl border via-purple-100
-          h-96 md:h-[500px] flex items-center justify-center shadow-sm">
-
-          <div className="text-center">
-            <Image className="w-24 h-24 mx-auto text-purple-300 mb-4" />
-            <p className="text-gray-400 text-lg">
-              Product showcase — your images transform here
-            </p>
+      
+          <div className="mt-16">
+              <ImageSlider/>
           </div>
-
-        </div>
 
       </div>
     </section>

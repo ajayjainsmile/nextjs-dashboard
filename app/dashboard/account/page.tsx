@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getUserFromSession } from "@/app/lib/auth.server";
-import DashboardClient from "../components/ui/DashboardClient";
+import AccountClient from "@/app/components/ui/AccountClient";
 
 export default async function AccountPage() {
   const user = await getUserFromSession();
@@ -9,5 +9,5 @@ export default async function AccountPage() {
     redirect("/login");
   }
 
-  return <DashboardClient user={user} />;
+  return <AccountClient user={user} />;
 }
