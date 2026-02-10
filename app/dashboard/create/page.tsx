@@ -14,7 +14,7 @@ export default async function CreateNow() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <HeaderInner user={user} />
-      <UploadForm user={null} />
+      <UploadForm user={user} />
     </div>
   );
 }
