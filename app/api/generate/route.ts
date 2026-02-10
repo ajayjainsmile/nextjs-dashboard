@@ -22,8 +22,8 @@ export async function POST(req: Request) {
 
   await Image.create({
     originalImage: image,
-    generatedImage: output[0]
+    generatedImage: output
   });
 
-  return Response.json({ success: true, image: output[0] });
+  return Response.json({ success: true, image: output });
 }
