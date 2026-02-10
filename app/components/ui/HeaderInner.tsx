@@ -5,7 +5,10 @@ import { Plus, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 type HeaderProps = {
-  user: string | null;
+    user: {
+        name: string;
+        email: string;
+    };
 };
 
 export default function HeaderInner({ user }: HeaderProps) {
@@ -42,6 +45,7 @@ export default function HeaderInner({ user }: HeaderProps) {
         {/* Right Actions */}
         <div className="flex items-center gap-3">
           {/* Toggle Account / Dashboard */}
+          {user.name}
           {isAccount ? (
             <Link
               href="/dashboard"
@@ -64,7 +68,7 @@ export default function HeaderInner({ user }: HeaderProps) {
             className="px-6 py-2.5 rounded-lg font-semibold text-white bg-purple-600 hover:bg-purple-700 transition inline-flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
-            Create Now
+            Create Now 
           </Link>
         </div>
       </div>
